@@ -1,9 +1,5 @@
-//
-//  Resource.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/18/24.
-//
+#ifndef Resource_h
+#define Resource_h
 
 class Resource {
 protected:
@@ -14,9 +10,11 @@ public:
     Resource(int max);
     virtual ~Resource() = default;
 
-    virtual void Consume(int amount);
-    virtual void Regenerate(int amount);
+    virtual void consume(int amount);
+    virtual void regenerate(int amount);
 
-    int GetCurrentAmount() const { return currentAmount; }
-    int GetMaxAmount() const { return maxAmount; }
+    int getCurrentAmount() const { return currentAmount; }
+    int getMaxAmount() const { return maxAmount; }
 };
+
+#endif

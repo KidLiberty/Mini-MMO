@@ -11,18 +11,22 @@
 #include <string>
 #include <vector>
 #include <memory>
+
 #include "../InGameClasses/InGameClass.h"
 #include "../InGameClasses/InGameClassType.h"
+#include "../Resources/Energy.h"
+//#include "../Resources/Mana.h"
+//#include "../Resources/Rage.h"
 #include "../Resources/Resource.h"
 
 class Entity {
 private:
-    std::unique_ptr<Resource> resource;
-    InGameClassType inGameClassType;
-protected:
     std::string name;
+    InGameClassType inGameClassType;
     int level;
     int health;
+    std::unique_ptr<Resource> resource;
+    
     float movementSpeed;
     
     // Core Stats
@@ -52,13 +56,26 @@ protected:
     int healingPerSecond;
     int armorPenetration;
     
+    static std::unique_ptr<Resource> CreateResource(InGameClassType classType) {
+           switch (classType) {
+               case InGameClassType::Rogue:
+                   return std::make_unique<Energy>(100);
+//               case InGameClassType::Mage:
+//                   return std::make_unique<Mana>();
+//               case InGameClassType::Warrior:
+//                   return std::make_unique<Rage>();
+               default:
+                   throw std::invalid_argument("Invalid class type");
+           }
+       }
+    
 public:
     Entity(const std::string& entityName, int entityLevel, InGameClassType classType)
         : name(entityName), level(entityLevel), inGameClassType(classType) {
            // Initialize resource based on in-game class type
            switch (inGameClassType) {
                case InGameClassType::Druid:
-                   // resource = Mana();
+                   // resource = new Mana();
                    break;
                case InGameClassType::Hunter:
                    // resource = new Mana();

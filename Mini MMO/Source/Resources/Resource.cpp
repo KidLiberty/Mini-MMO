@@ -10,10 +10,10 @@
 
 Resource::Resource(int max) : maxAmount(max), currentAmount(max) {}
 
-void Resource::Consume(int amount) {
+void Resource::consume(int amount) {
     currentAmount = std::max(0, currentAmount - amount);
 }
 
-void Resource::Regenerate(int amount) {
+void Resource::regenerate(int amount) {
     currentAmount = std::min(maxAmount, currentAmount + amount);
 }
