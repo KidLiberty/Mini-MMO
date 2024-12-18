@@ -10,12 +10,15 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "../InGameClasses/InGameClass.h"
+#include "../InGameClasses/InGameClassType.h"
+#include "../Resources/Resource.h"
 
 class Entity {
 private:
-    // TODO: Implement logic for inGameClass to be added to Entity constructor
-    // InGameClass inGameClass;
+    std::unique_ptr<Resource> resource;
+    InGameClassType inGameClassType;
 protected:
     std::string name;
     int level;
@@ -50,9 +53,39 @@ protected:
     int armorPenetration;
     
 public:
-//    Entity(InGameClass* newClass) : inGameClass(newClass) {
-//        inGameClass->ApplyClassMechanics(*this);
-//    }
+    Entity(const std::string& entityName, int entityLevel, InGameClassType classType)
+        : name(entityName), level(entityLevel), inGameClassType(classType) {
+           // Initialize resource based on in-game class type
+           switch (inGameClassType) {
+               case InGameClassType::Druid:
+                   // resource = Mana();
+                   break;
+               case InGameClassType::Hunter:
+                   // resource = new Mana();
+                   break;
+               case InGameClassType::Mage:
+                   // resource = new Mana();
+                   break;
+               case InGameClassType::Paladin:
+                   // resource = new Mana();
+                   break;
+               case InGameClassType::Priest:
+                   // resource = new Mana();
+                   break;
+               case InGameClassType::Rogue:
+                   // resource = new Energy();
+                   break;
+               case InGameClassType::Warlock:
+                   // resource = new Mana();
+                   break;
+               case InGameClassType::Warrior:
+                   // resource = new Rage();
+                   break;
+               default:
+                   throw std::invalid_argument("Invalid class type");
+           }
+       }
+    
     // Getters and Setters
     const std::string& GetName() const { return name; }
     void SetName(const std::string& newName) { name = newName; }
