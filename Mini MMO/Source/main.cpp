@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include "../Include/Entities/Entity.h"
 
 int main() {
     std::cout << "Hello, world!" << std::endl;

@@ -8,17 +8,18 @@
 #ifndef Entity_h
 #define Entity_h
 
-// Entity.h
-#pragma once
 #include <string>
 #include <vector>
+#include "../InGameClasses/InGameClass.h"
 
 class Entity {
+private:
+    // TODO: Implement logic for inGameClass to be added to Entity constructor
+    // InGameClass inGameClass;
 protected:
     std::string name;
     int level;
     int health;
-    int attackPower;
     float movementSpeed;
     
     // Core Stats
@@ -49,6 +50,9 @@ protected:
     int armorPenetration;
     
 public:
+//    Entity(InGameClass* newClass) : inGameClass(newClass) {
+//        inGameClass->ApplyClassMechanics(*this);
+//    }
     // Getters and Setters
     const std::string& GetName() const { return name; }
     void SetName(const std::string& newName) { name = newName; }
@@ -79,9 +83,6 @@ public:
 
     int GetSpirit() const { return spirit; }
     void SetSpirit(int newSpirit) { spirit = newSpirit; }
-
-    int GetAttackPower() const { return attackPower; }
-    void SetAttackPower(int newAttackPower) { attackPower = newAttackPower; }
 
     int GetSpellPower() const { return spellPower; }
     void SetSpellPower(int newSpellPower) { spellPower = newSpellPower; }
