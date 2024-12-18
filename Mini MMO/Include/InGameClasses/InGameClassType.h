@@ -13,4 +13,4 @@ enum class InGameClassType {
     Warrior,
 };
 
-#endif /* InGameClassType_h */
+#endif

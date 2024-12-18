@@ -15,7 +15,7 @@
 class Entity {
 private:
     std::string name;
-    InGameClassType inGameClassType;
+    const InGameClassType inGameClassType;
     int level;
     int health;
     std::unique_ptr<Resource> resource;
@@ -49,128 +49,143 @@ private:
     int healingPerSecond;
     int armorPenetration;
     
-    static std::unique_ptr<Resource> CreateResource(InGameClassType classType) {
-           switch (classType) {
-               case InGameClassType::Rogue:
-                   return std::make_unique<Energy>(100);
-               case InGameClassType::Mage:
-                   return std::make_unique<Mana>(150);
-               case InGameClassType::Warrior:
-                   return std::make_unique<Rage>(100);
-               default:
-                   throw std::invalid_argument("Invalid class type");
-           }
+    static std::unique_ptr<Resource> createResource(InGameClassType classType) {
+       switch (classType) {
+           case InGameClassType::Rogue:
+               return std::make_unique<Energy>(100);
+           case InGameClassType::Mage:
+               return std::make_unique<Mana>(150);
+           case InGameClassType::Warrior:
+               return std::make_unique<Rage>(100);
+           default:
+               throw std::invalid_argument("Invalid class type");
        }
+    }
+    
+    void initializeClassProperties(InGameClassType classType) {
+        switch (classType) {
+            case InGameClassType::Mage:
+                // Set stats specific to Mage
+                strength = 5;
+                agility = 10;
+                stamina = 10;
+                intellect = 30;
+                spirit = 25;
+                spellPower = 60;
+                // Add other stats and abilities...
+                break;
+            case InGameClassType::Rogue:
+                // Set stats specific to Rogue
+                strength = 10;
+                agility = 20;
+                stamina = 15;
+                intellect = 5;
+                spirit = 8;
+                attackPower = 50;
+                // Add other stats and abilities...
+                break;
+            case InGameClassType::Warrior:
+                // Set stats specific to Warrior
+                strength = 20;
+                agility = 10;
+                stamina = 25;
+                intellect = 5;
+                spirit = 8;
+                defense = 30;
+                // Add other stats and abilities...
+                break;
+            default:
+                throw std::invalid_argument("Invalid class type");
+        }
+    }
     
 public:
     Entity(const std::string& entityName, int entityLevel, InGameClassType classType)
         : name(entityName), level(entityLevel), inGameClassType(classType) {
-           // Initialize resource based on in-game class type
-           switch (inGameClassType) {
-               case InGameClassType::Druid:
-                   // resource = new Mana();
-                   break;
-               case InGameClassType::Hunter:
-                   // resource = new Mana();
-                   break;
-               case InGameClassType::Mage:
-                   // resource = new Mana();
-                   break;
-               case InGameClassType::Paladin:
-                   // resource = new Mana();
-                   break;
-               case InGameClassType::Priest:
-                   // resource = new Mana();
-                   break;
-               case InGameClassType::Rogue:
-                   // resource = new Energy();
-                   break;
-               case InGameClassType::Warlock:
-                   // resource = new Mana();
-                   break;
-               case InGameClassType::Warrior:
-                   // resource = new Rage();
-                   break;
-               default:
-                   throw std::invalid_argument("Invalid class type");
-           }
-       }
+            
+        // Initialize resource based on in-game class type
+        resource = createResource(classType);
+        initializeClassProperties(classType);
+    }
     
-    // Getters and Setters
-    const std::string& GetName() const { return name; }
-    void SetName(const std::string& newName) { name = newName; }
+    // TODO: Implement a getter & setter for Resource
+    // const Resource* getResource() const { return resource; }
+    
+    const std::string& getName() const { return name; }
+    void setName(const std::string& newName) { name = newName; }
 
-    int GetLevel() const { return level; }
-    void SetLevel(int newLevel) { level = newLevel; }
+    int getLevel() const { return level; }
+    void setLevel(int newLevel) { level = newLevel; }
 
-    int GetHealth() const { return health; }
-    void SetHealth(int newHealth) { health = newHealth; }
+    int getHealth() const { return health; }
+    void setHealth(int newHealth) { health = newHealth; }
 
-    int GetAttackPower() const { return attackPower; }
-    void SetAttackPower(int newAttackPower) { attackPower = newAttackPower; }
+    int getAttackPower() const { return attackPower; }
+    void setAttackPower(int newAttackPower) { attackPower = newAttackPower; }
 
-    float GetMovementSpeed() const { return movementSpeed; }
-    void SetMovementSpeed(float newSpeed) { movementSpeed = newSpeed; }
+    float getMovementSpeed() const { return movementSpeed; }
+    void setMovementSpeed(float newSpeed) { movementSpeed = newSpeed; }
 
-    int GetStrength() const { return strength; }
-    void SetStrength(int newStrength) { strength = newStrength; }
+    int getStrength() const { return strength; }
+    void setStrength(int newStrength) { strength = newStrength; }
 
-    int GetAgility() const { return agility; }
-    void SetAgility(int newAgility) { agility = newAgility; }
+    int getAgility() const { return agility; }
+    void setAgility(int newAgility) { agility = newAgility; }
 
-    int GetStamina() const { return stamina; }
-    void SetStamina(int newStamina) { stamina = newStamina; }
+    int getStamina() const { return stamina; }
+    void setStamina(int newStamina) { stamina = newStamina; }
 
-    int GetIntellect() const { return intellect; }
-    void SetIntellect(int newIntellect) { intellect = newIntellect; }
+    int getIntellect() const { return intellect; }
+    void setIntellect(int newIntellect) { intellect = newIntellect; }
 
-    int GetSpirit() const { return spirit; }
-    void SetSpirit(int newSpirit) { spirit = newSpirit; }
+    int getSpirit() const { return spirit; }
+    void setSpirit(int newSpirit) { spirit = newSpirit; }
 
-    int GetSpellPower() const { return spellPower; }
-    void SetSpellPower(int newSpellPower) { spellPower = newSpellPower; }
+    int getSpellPower() const { return spellPower; }
+    void setSpellPower(int newSpellPower) { spellPower = newSpellPower; }
 
-    int GetArmor() const { return armor; }
-    void SetArmor(int newArmor) { armor = newArmor; }
+    int getArmor() const { return armor; }
+    void setArmor(int newArmor) { armor = newArmor; }
 
-    int GetResilience() const { return resilience; }
-    void SetResilience(int newResilience) { resilience = newResilience; }
+    int getResilience() const { return resilience; }
+    void setResilience(int newResilience) { resilience = newResilience; }
 
-    int GetDefense() const { return defense; }
-    void SetDefense(int newDefense) { defense = newDefense; }
+    int getDefense() const { return defense; }
+    void setDefense(int newDefense) { defense = newDefense; }
 
-    int GetDodge() const { return dodge; }
-    void SetDodge(int newDodge) { dodge = newDodge; }
+    int getDodge() const { return dodge; }
+    void setDodge(int newDodge) { dodge = newDodge; }
 
-    int GetParry() const { return parry; }
-    void SetParry(int newParry) { parry = newParry; }
+    int getParry() const { return parry; }
+    void setParry(int newParry) { parry = newParry; }
 
-    int GetBlock() const { return block; }
-    void SetBlock(int newBlock) { block = newBlock; }
+    int getBlock() const { return block; }
+    void setBlock(int newBlock) { block = newBlock; }
 
-    int GetHaste() const { return haste; }
-    void SetHaste(int newHaste) { haste = newHaste; }
+    int getHaste() const { return haste; }
+    void setHaste(int newHaste) { haste = newHaste; }
 
-    int GetCrit() const { return crit; }
-    void SetCrit(int newCrit) { crit = newCrit; }
+    int getCrit() const { return crit; }
+    void setCrit(int newCrit) { crit = newCrit; }
 
-    int GetHit() const { return hit; }
-    void SetHit(int newHit) { hit = newHit; }
+    int getHit() const { return hit; }
+    void setHit(int newHit) { hit = newHit; }
 
-    int GetExpertise() const { return expertise; }
-    void SetExpertise(int newExpertise) { expertise = newExpertise; }
+    int getExpertise() const { return expertise; }
+    void setExpertise(int newExpertise) { expertise = newExpertise; }
 
-    int GetSpellCrit() const { return spellCrit; }
-    void SetSpellCrit(int newSpellCrit) { spellCrit = newSpellCrit; }
+    int getSpellCrit() const { return spellCrit; }
+    void setSpellCrit(int newSpellCrit) { spellCrit = newSpellCrit; }
 
-    int GetDamagePerSecond() const { return damagePerSecond; }
-    void SetDamagePerSecond(int newDPS) { damagePerSecond = newDPS; }
+    int getDamagePerSecond() const { return damagePerSecond; }
+    void setDamagePerSecond(int newDPS) { damagePerSecond = newDPS; }
 
-    int GetHealingPerSecond() const { return healingPerSecond; }
-    void SetHealingPerSecond(int newHPS) { healingPerSecond = newHPS; }
+    int getHealingPerSecond() const { return healingPerSecond; }
+    void setHealingPerSecond(int newHPS) { healingPerSecond = newHPS; }
 
-    int GetArmorPenetration() const { return armorPenetration; }
-    void SetArmorPenetration(int newArmorPen) { armorPenetration = newArmorPen; }
+    int getArmorPenetration() const { return armorPenetration; }
+    void setArmorPenetration(int newArmorPen) { armorPenetration = newArmorPen; }
+
 };
 
-#endif /* Entity_h */
+#endif
