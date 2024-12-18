@@ -15,7 +15,7 @@
 #include "../InGameClasses/InGameClass.h"
 #include "../InGameClasses/InGameClassType.h"
 #include "../Resources/Energy.h"
-//#include "../Resources/Mana.h"
+#include "../Resources/Mana.h"
 //#include "../Resources/Rage.h"
 #include "../Resources/Resource.h"
 
@@ -60,8 +60,8 @@ private:
            switch (classType) {
                case InGameClassType::Rogue:
                    return std::make_unique<Energy>(100);
-//               case InGameClassType::Mage:
-//                   return std::make_unique<Mana>();
+               case InGameClassType::Mage:
+                   return std::make_unique<Mana>(150);
 //               case InGameClassType::Warrior:
 //                   return std::make_unique<Rage>();
                default:
