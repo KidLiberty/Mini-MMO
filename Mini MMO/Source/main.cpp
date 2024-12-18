@@ -1,13 +1,10 @@
-//
-//  main.cpp
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/18/24.
-//
-
 #include <iostream>
+#include <memory>
+
+#include "../Include/Entities/Entity.h"
+#include "../Include/InGameClasses/InGameClassType.h"
 
 int main() {
-    std::cout << "Hello, world!" << std::endl;
+    // std::unique_ptr<Entity> entity = std::make_unique<Entity>("Ackeron", 1, InGameClassType::Rogue);
     return 0;
 }
