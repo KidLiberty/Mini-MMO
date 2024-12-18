@@ -1,10 +1,3 @@
-//
-//  Entity.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/18/24.
-//
-
 #ifndef Entity_h
 #define Entity_h
 
@@ -16,7 +9,7 @@
 #include "../InGameClasses/InGameClassType.h"
 #include "../Resources/Energy.h"
 #include "../Resources/Mana.h"
-//#include "../Resources/Rage.h"
+#include "../Resources/Rage.h"
 #include "../Resources/Resource.h"
 
 class Entity {
@@ -62,8 +55,8 @@ private:
                    return std::make_unique<Energy>(100);
                case InGameClassType::Mage:
                    return std::make_unique<Mana>(150);
-//               case InGameClassType::Warrior:
-//                   return std::make_unique<Rage>();
+               case InGameClassType::Warrior:
+                   return std::make_unique<Rage>(100);
                default:
                    throw std::invalid_argument("Invalid class type");
            }
