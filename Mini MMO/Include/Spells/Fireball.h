@@ -3,15 +3,14 @@
 
 #include <iostream>
 
+#include "../Resources/Resource.h"
 #include "Spell.h"
 
 class Fireball : public Spell {
 public:
-    Fireball() : Spell("Fireball", 20, 50) {} // Example values
+    Fireball();
 
-    void cast() const override {
-        std::cout << "Casting " << name << " for " << damage << " damage!\n";
-    }
+//    void cast(Resource& resource) const override;
 };
 
 #endif

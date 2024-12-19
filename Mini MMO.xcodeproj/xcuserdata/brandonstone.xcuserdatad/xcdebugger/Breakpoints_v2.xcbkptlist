@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "41271E02-D16C-464F-B15F-324C0671469D"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E0B03170-3132-4EB6-A9D3-D3D49FEBD93F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mini MMO/Source/Resources/Resource.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "E0B03170-3132-4EB6-A9D3-D3D49FEBD93F - a5cbd7b23996e76d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Resource::Resource(int)"
+                  moduleName = "Mini MMO"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/brandonstone/C++/Mini%20MMO/Mini%20MMO/Source/Resources/Resource.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11">
+               </Location>
+               <Location
+                  uuid = "E0B03170-3132-4EB6-A9D3-D3D49FEBD93F - a5cbd7b23996e76d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Resource::Resource(int)"
+                  moduleName = "Mini MMO"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/brandonstone/C++/Mini%20MMO/Mini%20MMO/Source/Resources/Resource.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
