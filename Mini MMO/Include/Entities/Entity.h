@@ -11,6 +11,8 @@
 #include "../Resources/Mana.h"
 #include "../Resources/Rage.h"
 #include "../Resources/Resource.h"
+#include "../Spells/Spell.h"
+#include "../Spells/SpellFactory.h"
 
 class Entity {
 private:
@@ -18,9 +20,10 @@ private:
     const InGameClassType inGameClassType;
     int level;
     int health;
+    std::vector<std::unique_ptr<Spell>> spellBook;
     std::unique_ptr<Resource> resource;
     
-    float movementSpeed;
+    float movementSpeed = 10.0f;
     
     // Core Stats
     int strength;
@@ -62,10 +65,39 @@ private:
        }
     }
     
+    void initializeClassSpells(InGameClassType classType) {
+        switch (classType) {
+            case InGameClassType::Mage:
+                // spellBook.push_back(std::make_unique<Fireball>());
+                break;
+            case InGameClassType::Rogue:
+                // Add Rogue-specific spells here
+                break;
+            case InGameClassType::Warrior:
+                // Add Warrior-specific spells here
+                break;
+            default:
+                throw std::invalid_argument("Invalid class type");
+        }
+    }
+    
+    void castSpell(int spellIndex) {
+        if (spellIndex < 0 || spellIndex >= spellBook.size()) {
+            throw std::out_of_range("Invalid spell index");
+        }
+
+        auto& spell = spellBook[spellIndex];
+        if (resource->getCurrentAmount() >= spell->getResourceCost()) {
+            spell->cast();
+            resource->consume(spell->getResourceCost());
+        } else {
+            std::cout << "Not enough resource to cast " << spell->getName() << "!\n";
+        }
+    }
+    
     void initializeClassProperties(InGameClassType classType) {
         switch (classType) {
             case InGameClassType::Mage:
-                // Set stats specific to Mage
                 strength = 5;
                 agility = 10;
                 stamina = 10;
@@ -75,7 +107,6 @@ private:
                 // Add other stats and abilities...
                 break;
             case InGameClassType::Rogue:
-                // Set stats specific to Rogue
                 strength = 10;
                 agility = 20;
                 stamina = 15;
@@ -85,7 +116,6 @@ private:
                 // Add other stats and abilities...
                 break;
             case InGameClassType::Warrior:
-                // Set stats specific to Warrior
                 strength = 20;
                 agility = 10;
                 stamina = 25;
@@ -106,6 +136,7 @@ public:
         // Initialize resource based on in-game class type
         resource = createResource(classType);
         initializeClassProperties(classType);
+        spellBook = SpellFactory::createSpells(classType);
     }
     
     // TODO: Implement a getter & setter for Resource
@@ -113,6 +144,8 @@ public:
     
     const std::string& getName() const { return name; }
     void setName(const std::string& newName) { name = newName; }
+    
+    const InGameClassType getInGameClassType() const { return inGameClassType; }
 
     int getLevel() const { return level; }
     void setLevel(int newLevel) { level = newLevel; }

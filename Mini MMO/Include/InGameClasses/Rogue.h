@@ -4,6 +4,7 @@
 #include "InGameClass.h"
 
 class Rogue : public InGameClass {
+public:
     Rogue();
 }
 
