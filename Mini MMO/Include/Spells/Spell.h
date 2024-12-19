@@ -5,6 +5,9 @@
 
 #include "../Resources/Resource.h"
 
+
+class Entity;
+
 class Spell {
 protected:
     std::string name;
@@ -18,6 +21,8 @@ public:
     const std::string& getName() const { return name; }
     int getResourceCost() const { return resourceCost; }
     int getDamage() const { return damage; }
+    
+    virtual void cast(Entity& caster, Entity* target = nullptr) const = 0;
 };
 
 #endif

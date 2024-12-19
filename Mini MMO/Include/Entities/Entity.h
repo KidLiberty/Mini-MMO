@@ -62,7 +62,9 @@ private:
 public:
     Entity(const std::string& entityName, int entityLevel, InGameClassType classType);
     
-    void castSpell(int spellIndex, std::unique_ptr<Resource>& resource);
+    void castSpell(int spellIndex, Entity* target);
+    
+    void takeDamage(int amount);
     
     // TODO: Implement a getter & setter for Resource
     // const Resource* getResource() const { return resource; }

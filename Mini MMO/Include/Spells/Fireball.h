@@ -7,10 +7,13 @@
 #include "Spell.h"
 
 class Fireball : public Spell {
+private:
+    int baseDamage;
+    float damagePerLevel; // How much damage increases per level
 public:
-    Fireball();
+    Fireball(int level);
 
-//    void cast(Resource& resource) const override;
+    void cast(Entity& caster, Entity* target = nullptr) const override;
 };
 
 #endif

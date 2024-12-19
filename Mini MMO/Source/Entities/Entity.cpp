@@ -28,10 +28,10 @@ std::unique_ptr<Resource> Entity::createResource(InGameClassType classType) {
 void Entity::initializeClassSpells(InGameClassType classType) {
     switch (classType) {
         case InGameClassType::Mage:
-            spellBook.push_back(std::make_unique<Fireball>());
+            spellBook.push_back(std::make_unique<Fireball>(1));
             break;
         case InGameClassType::Rogue:
-            spellBook.push_back(std::make_unique<Eviscerate>());
+            spellBook.push_back(std::make_unique<Eviscerate>(1));
             break;
         case InGameClassType::Warrior:
             // Add Warrior-specific spells here
@@ -75,16 +75,28 @@ void Entity::initializeClassProperties(InGameClassType classType) {
     }
 }
 
-//void Entity::castSpell(int spellIndex, std::unique_ptr<Resource>& resource) {
-//    if (spellIndex < 0 || spellIndex >= spellBook.size()) {
-//        throw std::out_of_range("Invalid spell index");
-//    }
-//
-//    auto& spell = spellBook[spellIndex];
-//    if (resource->getCurrentAmount() >= spell->getResourceCost()) {
-//        spell->cast(); // Assuming cast() does not need resource parameter here
-//        resource->consume(spell->getResourceCost());
-//    } else {
-//        std::cout << "Not enough resource to cast " << spell->getName() << "!\n";
-//    }
-//}
+void Entity::castSpell(int spellIndex, Entity* target) {
+    if (spellIndex < 0 || spellIndex >= spellBook.size()) {
+        throw std::out_of_range("Invalid spell index");
+    }
+
+    auto& spell = spellBook[spellIndex];
+    if (resource->getCurrentAmount() >= spell->getResourceCost()) {
+        resource->consume(spell->getResourceCost());
+        spell->cast(*this, target); // Pass the caster and the optional target
+    } else {
+        std::cout << "Not enough resource to cast " << spell->getName() << "!\n";
+    }
+}
+
+void Entity::takeDamage(int amount) {
+    if (amount < 0) {
+        throw std::invalid_argument("Damage amount cannot be negative");
+    }
+   
+    health -= amount;
+    if (health < 0) {
+        // Ensure health does not go below zero
+        health = 0;
+    }
+}

@@ -1,16 +1,33 @@
 #include <iostream>
+#include <random>
 
+#include "../../Include/Entities/Entity.h"
 #include "../../Include/Resources/Resource.h"
 #include "../../Include/Spells/Fireball.h"
 
-Fireball::Fireball() : Spell("Fireball", 20, 50) {} 
+Fireball::Fireball(int level) : Spell("Fireball", 30 + level * 10, 50 + level * 5), baseDamage(50 + level * 5), damagePerLevel(5.0f) {}
 
-//void Fireball::cast(Resource& resource) const {
-//   if (resource.getCurrentAmount() >= getResourceCost()) {
-//       // Perform casting logic
-//       std::cout << "Casting " << getName() << " for " << getDamage() << " damage!\n";
-//       resource.consume(getResourceCost());
-//   } else {
-//       std::cout << "Not enough resource to cast " << getName() << "!\n";
-//   }
-//}
+void Fireball::cast(Entity& caster, Entity* target) const {
+    // Calculate base damage for this spell
+    int finalDamage = baseDamage + (caster.getLevel() * damagePerLevel);
+
+    // Add randomness
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.9, 1.1); // 90% to 110%
+
+    float randomMultiplier = dis(gen);
+    finalDamage = static_cast<int>(finalDamage * randomMultiplier);
+
+    // Optionally, apply caster stats (like spell power) to influence damage
+    finalDamage = static_cast<int>(finalDamage * (caster.getSpellPower() / 100.0f));
+
+    // Apply the damage to the target
+    if (target) {
+        target->takeDamage(finalDamage);
+        std::cout << caster.getName() << " casts Fireball on " << target->getName() << " for " << finalDamage << " damage!\n";
+    } else {
+        std::cout << "Cast Fireball with " << finalDamage << " damage!\n";
+    }
+}
+
