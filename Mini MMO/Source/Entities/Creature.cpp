@@ -13,18 +13,20 @@ Creature::Creature(int id, const std::string& name, int level, InGameClassType t
 void Creature::generateLoot() {
     std::unique_ptr<LootItem> sword = std::make_unique<LootItem>("Rusty Sword", ItemQuality::Common, 0.25f);
     lootTable.addItem(std::move(sword));
-    std::unique_ptr<LootItem> linenCloth = std::make_unique<LootItem>("Rusty Sword", ItemQuality::Common, 1.0f);
+    std::unique_ptr<LootItem> linenCloth = std::make_unique<LootItem>("Linen Cloth", ItemQuality::Common, 0.45f);
     lootTable.addItem(std::move(linenCloth));
+    std::unique_ptr<LootItem> ashkandi = std::make_unique<LootItem>("Ashkandi, Greatsword of the Brotherhood", ItemQuality::Epic, 0.01f);
+    lootTable.addItem(std::move(ashkandi));
 }
 
 void Creature::dropLoot() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0, 1.0);
+    std::random_device randomDevice;
+    std::mt19937 generation(randomDevice());
+    std::uniform_real_distribution<> distribution(0.0, 1.0);
 
     // Loop through the loot table and drop items based on chance
     for (const auto& lootItem : lootTable.getItems()) {
-        float randValue = dis(gen);
+        float randValue = distribution(generation);
         if (randValue <= lootItem->getChance()) {
             std::cout << getName() << " has dropped " << lootItem->getName() << "." << std::endl;
             

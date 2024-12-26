@@ -12,13 +12,14 @@ void Fireball::cast(Entity& caster, Entity* target) const {
     // Calculate base damage for this spell
     int finalDamage = baseDamage + (caster.getLevel() * damagePerLevel);
 
-    // Static random number generator (initialize only once)
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.9, 1.1); // 90% to 110%
+    // Random number generator (static ensures it is initialized only once)
+    static std::random_device randomDevice;
+    static std::mt19937 generation(randomDevice());
+    // 90% to 110%
+    std::uniform_real_distribution<> distribution(0.9, 1.1);
 
     // Apply random multiplier
-    float randomMultiplier = dis(gen);
+    float randomMultiplier = distribution(generation);
     finalDamage = static_cast<int>(finalDamage * randomMultiplier);
 
     // Optionally, apply caster stats (like spell power) to influence damage
