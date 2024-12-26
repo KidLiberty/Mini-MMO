@@ -12,4 +12,4 @@ enum class ArmorType {
     Feet,
 }
 
-#endif /* ArmorType_h */
+#endif

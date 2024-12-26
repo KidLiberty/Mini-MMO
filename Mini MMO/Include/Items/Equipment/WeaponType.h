@@ -1,12 +1,19 @@
-//
-//  WeaponType.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/20/24.
-//
-
 #ifndef WeaponType_h
 #define WeaponType_h
 
+enum class WeaponType {
+    Axe,
+    Bow,
+    Crossbow,
+    Dagger,
+    FistWeapon,
+    Gun,
+    Mace,
+    Polearm,
+    Staff,
+    Sword,
+    Wand,
+    FishingPole,
+};
 
-#endif /* WeaponType_h */
+#endif

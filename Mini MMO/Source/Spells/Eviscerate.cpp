@@ -5,7 +5,7 @@
 #include "../../Include/Resources/Resource.h"
 #include "../../Include/Spells/Eviscerate.h"
 
-Eviscerate::Eviscerate(int level) : Spell("Eviscerate", 30 + level * 10, 50 + level * 5), baseDamage(50 + level * 5), damagePerLevel(50.0f) {}
+Eviscerate::Eviscerate(int level) : Spell("Eviscerate", 30 + level * 10, 50 + level * 5), baseDamage(50 + level * 5), damagePerLevel(5.0f) {}
 
 void Eviscerate::cast(Entity& caster, Entity* target) const {
     // Calculate base damage for this spell
@@ -18,15 +18,14 @@ void Eviscerate::cast(Entity& caster, Entity* target) const {
 
     float randomMultiplier = dis(gen);
     finalDamage = static_cast<int>(finalDamage * randomMultiplier);
-
-    // Optionally, apply caster stats (like spell power) to influence damage
-    finalDamage = static_cast<int>(finalDamage * (caster.getSpellPower() / 100.0f));
+    finalDamage = static_cast<int>(finalDamage * (caster.getAttackPower() / 100.0f));
 
     // Apply the damage to the target
     if (target) {
         target->takeDamage(finalDamage);
-        std::cout << "Cast Fireball on " << target->getName() << " for " << finalDamage << " damage!\n";
     } else {
-        std::cout << "Cast Fireball with " << finalDamage << " damage!\n";
+        std::cout << "Cast Eviscerate with " << finalDamage << " damage!" << std::endl;
     }
 }
+
+

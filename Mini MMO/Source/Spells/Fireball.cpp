@@ -5,17 +5,19 @@
 #include "../../Include/Resources/Resource.h"
 #include "../../Include/Spells/Fireball.h"
 
+// Constructor
 Fireball::Fireball(int level) : Spell("Fireball", 30 + level * 10, 50 + level * 5), baseDamage(50 + level * 5), damagePerLevel(5.0f) {}
 
 void Fireball::cast(Entity& caster, Entity* target) const {
     // Calculate base damage for this spell
     int finalDamage = baseDamage + (caster.getLevel() * damagePerLevel);
 
-    // Add randomness
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    // Static random number generator (initialize only once)
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.9, 1.1); // 90% to 110%
 
+    // Apply random multiplier
     float randomMultiplier = dis(gen);
     finalDamage = static_cast<int>(finalDamage * randomMultiplier);
 
@@ -25,9 +27,8 @@ void Fireball::cast(Entity& caster, Entity* target) const {
     // Apply the damage to the target
     if (target) {
         target->takeDamage(finalDamage);
-        std::cout << caster.getName() << " casts Fireball on " << target->getName() << " for " << finalDamage << " damage!\n";
     } else {
-        std::cout << "Cast Fireball with " << finalDamage << " damage!\n";
+        std::cout << "Cast Fireball with " << finalDamage << " damage!";
     }
 }
 

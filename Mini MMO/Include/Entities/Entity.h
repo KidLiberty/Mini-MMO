@@ -18,12 +18,15 @@
 
 class Entity {
 private:
+    int id;
     std::string name;
     const InGameClassType inGameClassType;
     int level;
     int health;
     std::vector<std::unique_ptr<Spell>> spellBook;
     std::unique_ptr<Resource> resource;
+    
+    float positionX, positionY;
     
     float movementSpeed = 10.0f;
     
@@ -60,14 +63,16 @@ private:
     void initializeClassProperties(InGameClassType classType);
     
 public:
-    Entity(const std::string& entityName, int entityLevel, InGameClassType classType);
+    Entity(const std::string& name, int level, InGameClassType type);
     
     void castSpell(int spellIndex, Entity* target);
-    
     void takeDamage(int amount);
+    virtual void die();
     
-    // TODO: Implement a getter & setter for Resource
-    // const Resource* getResource() const { return resource; }
+    friend std::ostream& operator<<(std::ostream& os, const Entity& entity) {
+        os << entity.getName();
+        return os;
+    }
     
     const std::string& getName() const { return name; }
     void setName(const std::string& newName) { name = newName; }

@@ -1,15 +1,15 @@
-//
-//  Armor.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/20/24.
-//
-
 #ifndef Armor_h
 #define Armor_h
 
+#include "../Item.h"
+#include "ArmorType.h"
+
 class Armor : Item {
-    
+private:
+    ArmorType type;
+public:
+    Armor();
+    void getArmorType() const { return type; }
 }
 
-#endif /* Armor_h */
+#endif

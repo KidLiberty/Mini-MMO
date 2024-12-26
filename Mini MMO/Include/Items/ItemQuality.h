@@ -1,13 +1,13 @@
-#ifndef ItemType_h
-#define ItemType_h
+#ifndef ItemQuality_h
+#define ItemQuality_h
 
-enum class ItemType {
+enum class ItemQuality {
     Poor,
     Common,
     Uncommon,
     Rare,
     Epic,
-    Legendary
-}
+    Legendary,
+};
 
 #endif

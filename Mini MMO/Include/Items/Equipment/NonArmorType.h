@@ -1,12 +1,11 @@
-//
-//  NonArmorType.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/20/24.
-//
-
 #ifndef NonArmorType_h
 #define NonArmorType_h
 
+enum class NonArmorType {
+    Neck,
+    Back,
+    Finger,
+    Trinket,
+}
 
-#endif /* NonArmorType_h */
+#endif

@@ -11,7 +11,6 @@ enum class InGameClassType {
     Shaman,
     Warlock,
     Warrior,
-    Gunmancer
 };
 
 #endif

@@ -3,13 +3,13 @@
 #include "../../Include/Entities/Entity.h"
 #include "../../Include/Resources/Resource.h"
 
-Entity::Entity(const std::string& entityName, int entityLevel, InGameClassType classType)
-    : name(entityName), level(entityLevel), inGameClassType(classType) {
-        
+Entity::Entity(const std::string& name, int level, InGameClassType type)
+    : name(name), level(level), inGameClassType(type) {
+    
     // Initialize resource based on in-game class type
-    resource = createResource(classType);
-    initializeClassProperties(classType);
-    spellBook = SpellFactory::createSpells(classType);
+    resource = createResource(type);
+    initializeClassProperties(type);
+    spellBook = SpellFactory::createSpells(type);
 }
 
 std::unique_ptr<Resource> Entity::createResource(InGameClassType classType) {
@@ -44,6 +44,7 @@ void Entity::initializeClassSpells(InGameClassType classType) {
 void Entity::initializeClassProperties(InGameClassType classType) {
     switch (classType) {
         case InGameClassType::Mage:
+            health = 50;
             strength = 5;
             agility = 10;
             stamina = 10;
@@ -53,6 +54,7 @@ void Entity::initializeClassProperties(InGameClassType classType) {
             // Add other stats and abilities...
             break;
         case InGameClassType::Rogue:
+            health = 80;
             strength = 10;
             agility = 20;
             stamina = 15;
@@ -62,6 +64,7 @@ void Entity::initializeClassProperties(InGameClassType classType) {
             // Add other stats and abilities...
             break;
         case InGameClassType::Warrior:
+            health = 120;
             strength = 20;
             agility = 10;
             stamina = 25;
@@ -83,9 +86,11 @@ void Entity::castSpell(int spellIndex, Entity* target) {
     auto& spell = spellBook[spellIndex];
     if (resource->getCurrentAmount() >= spell->getResourceCost()) {
         resource->consume(spell->getResourceCost());
-        spell->cast(*this, target); // Pass the caster and the optional target
+        
+        std::cout << name << " casts " << spell->getName() <<  " on " << target->getName() << "." << std::endl;
+        spell->cast(*this, target);
     } else {
-        std::cout << "Not enough resource to cast " << spell->getName() << "!\n";
+        std::cout << "Not enough resource to cast " << spell->getName() << "!" << std::endl;
     }
 }
 
@@ -98,5 +103,18 @@ void Entity::takeDamage(int amount) {
     if (health < 0) {
         // Ensure health does not go below zero
         health = 0;
+    }
+    
+    std::cout << name << " takes " << amount << " damage." << std::endl;
+    
+    if(health == 0) {
+        die();
+    }
+}
+
+void Entity::die() {
+    if(health <= 0) {
+        std::cout << name << " dies." << std::endl;
+        spellBook.clear();
     }
 }

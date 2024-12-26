@@ -1,12 +1,15 @@
-//
-//  NonArmor.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/20/24.
-//
-
 #ifndef NonArmor_h
 #define NonArmor_h
 
+#include "../Item.h"
+#include "NonArmorType.h"
 
-#endif /* NonArmor_h */
+class NonArmor : Item {
+private:
+    NonArmorType type;
+public:
+    NonArmor();
+    void getNonArmorType() const { return type; }
+}
+
+#endif

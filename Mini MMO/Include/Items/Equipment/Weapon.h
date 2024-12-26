@@ -1,12 +1,19 @@
-//
-//  Weapon.h
-//  Mini MMO
-//
-//  Created by Brandon Stone on 12/20/24.
-//
-
 #ifndef Weapon_h
 #define Weapon_h
 
+#include "../Item.h"
+#include "WeaponType.h"
+#include "WeaponSlot.h"
 
-#endif /* Weapon_h */
+class Weapon : Item {
+private:
+    WeaponSlot slot;
+    WeaponType type;
+public:
+    Weapon(std::string& name, ItemQuality quality, WeaponSlot slot, WeaponType type);
+    
+    WeaponSlot getSlot() const { return slot; }
+    WeaponType getType() const { return type; }
+};
+
+#endif 
