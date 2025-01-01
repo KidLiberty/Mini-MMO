@@ -43,6 +43,16 @@ void Entity::initializeClassSpells(InGameClassType classType) {
 
 void Entity::initializeClassProperties(InGameClassType classType) {
     switch (classType) {
+        case InGameClassType::Hunter:
+            health = 60;
+            strength = 7;
+            agility = 18;
+            stamina = 10;
+            intellect = 15;
+            spirit = 12;
+            spellPower = 60;
+            // Add other stats and abilities...
+            break;
         case InGameClassType::Mage:
             health = 50;
             strength = 5;
@@ -51,7 +61,6 @@ void Entity::initializeClassProperties(InGameClassType classType) {
             intellect = 30;
             spirit = 25;
             spellPower = 60;
-            // Add other stats and abilities...
             break;
         case InGameClassType::Rogue:
             health = 80;
@@ -61,7 +70,6 @@ void Entity::initializeClassProperties(InGameClassType classType) {
             intellect = 5;
             spirit = 8;
             attackPower = 50;
-            // Add other stats and abilities...
             break;
         case InGameClassType::Warrior:
             health = 120;

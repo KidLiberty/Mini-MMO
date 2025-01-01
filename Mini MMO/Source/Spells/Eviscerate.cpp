@@ -12,8 +12,8 @@ void Eviscerate::cast(Entity& caster, Entity* target) const {
     int finalDamage = baseDamage + (caster.getLevel() * damagePerLevel);
 
     // Add randomness
-    std::random_device randomDevice;
-    std::mt19937 generator(randomDevice());
+    static std::random_device randomDevice;
+    static std::mt19937 generator(randomDevice());
     std::uniform_real_distribution<> distribution(0.9, 1.1);
 
     float randomMultiplier = distribution(generator);

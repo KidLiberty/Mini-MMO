@@ -15,7 +15,6 @@ void Fireball::cast(Entity& caster, Entity* target) const {
     // Random number generator (static ensures it is initialized only once)
     static std::random_device randomDevice;
     static std::mt19937 generation(randomDevice());
-    // 90% to 110%
     std::uniform_real_distribution<> distribution(0.9, 1.1);
 
     // Apply random multiplier

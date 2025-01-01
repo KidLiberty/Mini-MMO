@@ -1,0 +1,25 @@
+{
+    "creatures": [
+      {
+          "id": 1,
+          "name": "Defias Pillager",
+          "loot": [
+              { "name": "Rusty Sword", "quality": "Common", "dropRate": 0.25 },
+              { "name": "Linen Cloth", "quality": "Common", "dropRate": 0.45 },
+              { "name": "Hops", "quality": "Common", "dropRate": 0.50 },
+              { "name": "Blackwater Cutlass", "quality": "Uncommon", "dropRate": 0.10 },
+              { "name": "Ashkandi, Greatsword of the Brotherhood", "quality": "Epic", "dropRate": 0.01 }
+          ]
+      },
+      {
+          "id": 2,
+          "name": "Defias Looter",
+          "loot": [
+              { "name": "Rusty Sword", "quality": "Common", "dropRate": 0.25 },
+              { "name": "Linen Cloth", "quality": "Common", "dropRate": 0.45 },
+              { "name": "Hops", "quality": "Common", "dropRate": 0.50 },
+              { "name": "Blackwater Cutlass", "quality": "Uncommon", "dropRate": 0.10 }
+          ]
+      }
+    ]
+}

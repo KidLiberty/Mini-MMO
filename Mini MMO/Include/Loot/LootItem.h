@@ -7,13 +7,13 @@
 
 class LootItem : public Item {
 private:
-    float chance; // Chance for the item to be dropped
+    float dropChance; // Chance for the item to be dropped
     
 public:
-    LootItem(const std::string& name, ItemQuality quality, float chance);
+    LootItem(const std::string& name, ItemQuality quality, float dropChance);
 
-    float getChance() const { return chance; }
-    void setChance(float newChance) { chance = newChance; }
+    float getDropChance() const { return dropChance; }
+    void setDropChance(float newChance) { dropChance = newChance; }
 };
 
 #endif

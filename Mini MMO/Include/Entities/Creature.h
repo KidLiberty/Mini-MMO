@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "Entity.h"
+#include "../External/json.hpp"
 #include "../Loot/LootTable.h"
 
 class Creature : public Entity {
@@ -19,7 +20,7 @@ public:
     Creature(int id, const std::string& name, int level, InGameClassType type);
     
     // Method to generate loot for the creature
-    void generateLoot();
+    void generateLoot(const int id);
     void die() override;
     void dropLoot();
     

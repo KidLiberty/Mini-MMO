@@ -2,4 +2,4 @@
 
 #include "../../Include/Loot/LootItem.h"
 
-LootItem::LootItem(const std::string& name, ItemQuality quality, float chance) : Item(name, quality), chance(chance) {}
+LootItem::LootItem(const std::string& name, ItemQuality quality, float dropChance) : Item(name, quality), dropChance(dropChance) {}
